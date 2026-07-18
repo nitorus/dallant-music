@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소식·게시판 | 공지·수강후기·블로그 - 달란트실용음악학원</title>
+<meta name="description" content="달란트실용음악학원 소식 게시판. 공지사항, 수강후기, 학원 블로그를 확인하세요. 화성시 동탄 실용음악학원.">
+<meta name="keywords" content="달란트실용음악학원,동탄실용음악학원,동탄음악학원,수강후기,공지사항">
+<link rel="stylesheet" href="style.css">
+<style>
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tabs button{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 16px;font-size:13.5px;font-weight:600;color:#c3cad8;cursor:pointer;transition:.15s}
+.tabs button.on,.tabs button:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+.writebtn{float:right;background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 18px;font-weight:700;font-size:13.5px;cursor:pointer}
+.plist{border-top:2px solid var(--dark)}
+.pitem{display:flex;gap:14px;align-items:center;padding:16px 6px;border-bottom:1px solid var(--line);cursor:pointer;transition:.12s}
+.pitem:hover{background:rgba(255,255,255,.05)}
+.pcat{flex-shrink:0;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px}
+.c-notice{background:#2563eb22;color:#2563eb}.c-review{background:#5b8c5122;color:#5b8c51}.c-blog{background:#3b82f622;color:#3b7fd6}.c-lesson{background:#2563eb1c;color:#2563eb}
+.pmain{flex:1;min-width:0}
+.pmain .pt{font-weight:700;font-size:15.5px;margin-bottom:3px}
+.pmain .pe{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pdate{flex-shrink:0;font-size:12.5px;color:#9a9186}
+.detail{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px}
+.detail h2{font-size:22px;margin:10px 0 6px}
+.detail .meta{color:#9a9186;font-size:13px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:20px}
+.detail .body{font-size:15px;line-height:1.9;white-space:pre-wrap;color:#dfe2ea}
+.back{background:none;border:0;color:var(--brand);font-weight:700;cursor:pointer;font-size:14px;margin-top:22px}
+.form{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+.form label{display:block;font-weight:700;font-size:13.5px;margin:14px 0 6px}
+.form input,.form select,.form textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:11px 12px;font-size:14px;font-family:inherit;background:rgba(255,255,255,.04);color:#e9ebf1}
+.form textarea{min-height:180px;resize:vertical}
+.form .row{display:flex;gap:12px}.form .row>div{flex:1}
+.form .submit{margin-top:18px;background:var(--brand);color:#fff;border:0;border-radius:8px;padding:12px 26px;font-weight:700;font-size:15px;cursor:pointer}
+.form .cancel{background:none;border:0;color:var(--muted);margin-left:10px;cursor:pointer}
+.hint{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:12px 15px;font-size:12.5px;color:#98a1b2;margin-bottom:20px}
+</style>
+</head>
+<body>
+
+<header>
+<div class="wrap nav">
+  <a class="logo" href="index.html">🎵 달란트<span>실용음악학원</span></a>
+  <button class="burger" onclick="document.getElementById('m').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <nav class="menu" id="m">
+    <a href="index.html#about">학원소개</a>
+    <div class="drop"><a href="index.html#lesson">클래스</a><div class="submenu"><a href="vocal.html">보컬</a><a href="drum.html">드럼</a><a href="guitar.html">기타</a><a href="compose.html">작곡·미디</a></div></div>
+    <div class="drop"><a href="exam.html">수강 안내</a><div class="submenu"><a href="exam.html">입시반</a><a href="music.html">취미반</a><a href="faq.html">FAQ</a></div></div>
+    <a href="room.html">연습실·합주실</a>
+    <a href="board.html" class="active">게시판</a>
+  </nav>
+</div>
+</header>
+
+<div class="wrap bc"><a href="index.html">홈</a> › 소식·게시판</div>
+
+<section>
+  <div class="wrap">
+    <span class="tag">BOARD · 소식·게시판</span>
+    <h2 class="stitle">공지 · 수강후기 · 블로그</h2>
+    <p class="slead">달란트실용음악학원의 새 소식과 수강후기, 음악 팁을 확인하세요.</p>
+
+    <div class="hint">💡 이 게시판은 브라우저에 저장되는 <b>프런트엔드 데모</b>입니다. 새 글을 쓰면 이 컴퓨터·브라우저에는 남지만, 방문자 모두에게 공개되는 실제 발행은 서버·CMS(워드프레스 등) 연결이 필요합니다.</div>
+
+    <!-- 목록 뷰 -->
+    <div id="listView">
+      <div>
+        <button class="writebtn" onclick="showForm()">✏️ 글쓰기</button>
+        <div class="tabs" id="tabs">
+          <button class="on" data-c="all" onclick="filter('all',this)">전체</button>
+          <button data-c="notice" onclick="filter('notice',this)">공지사항</button>
+          <button data-c="review" onclick="filter('review',this)">수강후기</button>
+          <button data-c="vocal" onclick="filter('vocal',this)">보컬</button>
+          <button data-c="drum" onclick="filter('drum',this)">드럼</button>
+          <button data-c="guitar" onclick="filter('guitar',this)">기타</button>
+          <button data-c="compose" onclick="filter('compose',this)">작곡</button>
+          <button data-c="exam" onclick="filter('exam',this)">입시</button>
+          <button data-c="music" onclick="filter('music',this)">취미</button>
+          <button data-c="practice" onclick="filter('practice',this)">연습실</button>
+        </div>
+      </div>
+      <div class="plist" id="plist"></div>
+    </div>
+
+    <!-- 상세 뷰 -->
+    <div id="detailView" style="display:none">
+      <div class="detail">
+        <span class="pcat" id="dCat"></span>
+        <h2 id="dTitle"></h2>
+        <div class="meta" id="dMeta"></div>
+        <div class="body" id="dBody"></div>
+        <button class="back" onclick="showList()">← 목록으로</button>
+      </div>
+    </div>
+
+    <!-- 글쓰기 뷰 -->
+    <div id="formView" style="display:none">
+      <div class="form">
+        <h2 class="stitle" style="font-size:20px">새 글 작성</h2>
+        <div class="row">
+          <div><label>카테고리</label>
+            <select id="fCat"><option value="notice">공지사항</option><option value="review">수강후기</option><option value="vocal">보컬</option><option value="drum">드럼</option><option value="guitar">기타</option><option value="compose">작곡</option><option value="exam">입시</option><option value="music">취미</option><option value="practice">연습실</option><option value="blog">블로그</option></select>
+          </div>
+          <div><label>작성자</label><input id="fAuthor" placeholder="이름 또는 학원"></div>
+        </div>
+        <label>제목</label><input id="fTitle" placeholder="제목을 입력하세요">
+        <label>내용</label><textarea id="fBody" placeholder="내용을 입력하세요"></textarea>
+        <button class="submit" onclick="savePost()">발행하기</button>
+        <button class="cancel" onclick="showList()">취소</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+<div class="ft">
+<div><div class="flogo">🎵 달란트실용음악학원</div><p>경기도 화성시 동탄중앙로 123, 3층<br>Tel. 031-373-7942</p></div>
+<div><h4>레슨</h4><a href="vocal.html">보컬</a><a href="drum.html">드럼</a><a href="guitar.html">기타</a><a href="exam.html">입시</a></div>
+<div><h4>안내</h4><a href="music.html">취미반</a><a href="room.html">연습실·합주실</a><a href="board.html">게시판</a><a href="index.html#contact">상담</a></div>
+</div>
+<div class="cr">© 2026 달란트실용음악학원 · 샘플 정보이며 실제 정보로 교체하세요.</div>
+</div></footer>
+
+<script src="posts.js"></script>
+<script>
+var CATLABEL={notice:'공지사항',review:'수강후기',blog:'블로그',vocal:'보컬',drum:'드럼',guitar:'기타',compose:'작곡',exam:'입시',music:'취미',practice:'연습실'};
+var CATCLASS={notice:'c-notice',review:'c-review',blog:'c-blog',vocal:'c-lesson',drum:'c-lesson',guitar:'c-lesson',compose:'c-lesson',exam:'c-lesson',music:'c-lesson',practice:'c-lesson'};
+var seed=window.DALLANT_SEED||[];
+function allPosts(){var u=[];try{u=JSON.parse(localStorage.getItem('dallant_posts')||'[]');}catch(e){}return u.concat(seed);}
+var curFilter='all';
+function render(){
+ var posts=allPosts().filter(function(p){return curFilter==='all'||p.cat===curFilter;});
+ var h='';
+ posts.forEach(function(p,i){
+  h+='<div class="pitem" onclick="openPost('+"'"+encodeURIComponent(p.title)+"','"+p.date+"'"+')">'
+   +'<span class="pcat '+CATCLASS[p.cat]+'">'+CATLABEL[p.cat]+'</span>'
+   +'<div class="pmain"><div class="pt">'+esc(p.title)+'</div><div class="pe">'+esc(p.body.replace(/\n/g,' '))+'</div></div>'
+   +'<div class="pdate">'+p.date+'</div></div>';
+ });
+ if(!posts.length)h='<div style="padding:30px;color:#9a9186">아직 글이 없습니다.</div>';
+ document.getElementById('plist').innerHTML=h;
+}
+function esc(s){return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function filter(c,btn){curFilter=c;[].forEach.call(document.querySelectorAll('#tabs button'),function(b){b.classList.remove('on');});btn.classList.add('on');render();}
+function openPost(t,d){t=decodeURIComponent(t);var p=allPosts().filter(function(x){return x.title===t&&x.date===d;})[0];if(!p)return;
+ document.getElementById('dCat').className='pcat '+CATCLASS[p.cat];document.getElementById('dCat').textContent=CATLABEL[p.cat];
+ document.getElementById('dTitle').textContent=p.title;
+ document.getElementById('dMeta').textContent=p.author+' · '+p.date;
+ document.getElementById('dBody').textContent=p.body;
+ document.getElementById('listView').style.display='none';document.getElementById('formView').style.display='none';document.getElementById('detailView').style.display='block';window.scrollTo(0,0);}
+function showList(){document.getElementById('detailView').style.display='none';document.getElementById('formView').style.display='none';document.getElementById('listView').style.display='block';render();}
+function showForm(){document.getElementById('listView').style.display='none';document.getElementById('detailView').style.display='none';document.getElementById('formView').style.display='block';window.scrollTo(0,0);}
+function savePost(){
+ var t=document.getElementById('fTitle').value.trim();var b=document.getElementById('fBody').value.trim();
+ if(!t||!b){alert('제목과 내용을 입력하세요.');return;}
+ var d=new Date().toISOString().slice(0,10);
+ var post={cat:document.getElementById('fCat').value,title:t,author:document.getElementById('fAuthor').value.trim()||'달란트실용음악학원',date:d,body:b};
+ var u=[];try{u=JSON.parse(localStorage.getItem('dallant_posts')||'[]');}catch(e){}
+ u.unshift(post);localStorage.setItem('dallant_posts',JSON.stringify(u));
+ document.getElementById('fTitle').value='';document.getElementById('fBody').value='';document.getElementById('fAuthor').value='';
+ curFilter='all';[].forEach.call(document.querySelectorAll('#tabs button'),function(b){b.classList.remove('on');});document.querySelector('#tabs button').classList.add('on');
+ showList();
+}
+document.querySelectorAll('#m a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('m').classList.remove('open');});});
+(function(){var c=(new URLSearchParams(location.search)).get('cat');if(c&&CATLABEL[c])curFilter=c;render();
+ var b=document.querySelector('#tabs button[data-c="'+curFilter+'"]');if(b){document.querySelectorAll('#tabs button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');}})();
+</script>
+</body>
+</html>
