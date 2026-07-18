@@ -18,6 +18,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(11,13,20,.78);backdrop-f
 .menu a.cta:hover{background:var(--accent-d);color:#fff}
 .menu .drop{position:relative}
 .menu .drop>a::after{content:"\25be";font-size:9px;margin-left:4px;color:#7b8494}
+.menu .drop::after{content:"";position:absolute;top:100%;left:0;width:100%;height:10px}
 .menu .submenu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:#141a27;border:1px solid var(--line);border-radius:12px;padding:6px;min-width:168px;box-shadow:0 16px 40px rgba(0,0,0,.5);z-index:60}
 .menu .drop:hover .submenu{display:block}
 .menu .submenu a{display:block;padding:9px 12px;border-radius:8px;font-size:13.5px;font-weight:500;color:#c3cad8;white-space:nowrap}
@@ -142,6 +143,7 @@ footer .cr{border-top:1px solid var(--line);padding-top:20px;font-size:12.5px;co
  .menu.open{display:flex}.menu a{padding:12px}.burger{display:flex}
  .menu .drop{width:100%}
  .menu .drop>a::after{display:none}
+ .menu .drop::after{display:none}
  .menu .submenu{display:block;position:static;border:0;box-shadow:none;padding:0 0 6px 16px;min-width:0;background:transparent}
  .menu .submenu a{padding:8px 12px;font-weight:500;color:#aab2c2}
  .hero{padding:64px 0}.hero h1{font-size:32px;letter-spacing:-1.2px}.hero p{font-size:15.5px}
